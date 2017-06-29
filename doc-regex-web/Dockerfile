@@ -21,16 +21,16 @@ RUN cd code
 RUN apt-get install -y openjdk-8-jdk
 #RUN export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 RUN git clone https://${user}@github.com/anon-ml/anonml-core.git
-RUN cd anonml-core && mvn clean install && cd ..
+RUN cd anonml-core && mvn clean install -DskipTests && cd ..
 
 RUN git clone https://${user}@github.com/anon-ml/anonml-document-management.git
-RUN cd anonml-document-management && mvn clean install && cd ..
+RUN cd anonml-document-management && mvn clean install -DskipTests && cd ..
 
-RUN git clone https://${user}$pwd@github.com/anon-ml/anonml-recognition-rulebased.git
-RUN cd anonml-recognition-rulebased && mvn clean install && cd ..
+RUN git clone https://${user}@github.com/anon-ml/anonml-recognition-rulebased.git
+RUN cd anonml-recognition-rulebased && mvn clean install -DskipTests && cd ..
 
-RUN git clone https://${user}$pwd@github.com/anon-ml/anonml-web.git
-RUN cd anonml-web && mvn clean install && cd ..
+RUN git clone https://${user}@github.com/anon-ml/anonml-web.git
+RUN cd anonml-web && mvn clean install -DskipTests && cd ..
 
 EXPOSE 27017
 EXPOSE 9000

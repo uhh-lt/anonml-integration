@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-mvn clean install &&
-docker build . -t anonml-docmgmt &&
-docker run -p 9001:9001 anonml-docmgmt
+docker build . -t doc-regex-web &&
+docker run -p 9000:9000 -p 9001:9001 -p 9002:9002 -p 27071:77071 doc-regex-web
