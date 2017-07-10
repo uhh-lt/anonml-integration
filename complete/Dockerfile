@@ -53,6 +53,7 @@ RUN git clone https://${user}@github.com/anon-ml/anonml-web.git
 RUN cd anonml-web && mvn clean install -DskipTests
 EXPOSE 9000
 
+RUN echo "....."
 # ML
 RUN git clone https://github.com/tudarmstadt-lt/GermaNER.git
 RUN ls -lh
@@ -61,6 +62,7 @@ RUN cd GermaNER/germaner && mvn clean install -Drat.skip=true
 RUN git clone https://github.com/seyyaw/cleartk.git
 RUN cd cleartk && mvn clean install -Drat.skip=true -Dcleartk.skipTests=svmlight -DskipTests
 
+RUN echo "........"
 RUN git clone https://${user}@github.com/anon-ml/anonml-recognition-ml.git
 RUN cd anonml-recognition-ml && git checkout dockerize
 
