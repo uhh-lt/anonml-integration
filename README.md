@@ -6,4 +6,7 @@ Docker container which installs the current version of document mangement, regex
 Build with ``docker build . --build-args user=githubusername:password -t anonml/drw``
 
 ## Complete
-Changer DockerFS to `aufs`
+Change DockerFS to `aufs`
+
+## Misc
+If you get an 'out of disc space' error, delete ` ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2` (will delete all docker container)
