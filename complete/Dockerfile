@@ -62,9 +62,9 @@ RUN cd GermaNER/germaner && mvn clean install -Drat.skip=true
 RUN git clone https://github.com/seyyaw/cleartk.git
 RUN cd cleartk && mvn clean install -Drat.skip=true -Dcleartk.skipTests=svmlight -DskipTests
 
-RUN echo "........"
+RUN echo "..........."
 RUN git clone https://${user}@github.com/anon-ml/anonml-recognition-ml.git
-RUN cd anonml-recognition-ml && git checkout dockerize
+
 
 RUN cd anonml-recognition-ml && cd src/main/resources/GermaNER && wget https://github.com/tudarmstadt-lt/GermaNER/releases/download/germaNER0.9.1/data.zip
 
@@ -78,6 +78,9 @@ RUN brew install crfsuite
 USER root
 EXPOSE 9003
 
+EXPOSE 9901
+EXPOSE 9902
+EXPOSE 9903
 
 COPY start.sh /
 ENTRYPOINT /start.sh
