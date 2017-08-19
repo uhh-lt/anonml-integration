@@ -8,10 +8,10 @@ Build with ``docker build . --build-arg user=githubusername:password -t anonml/d
 ## Complete
 * Change DockerFS to `aufs`
 * cd into the `complete` directory
-* run `docker build . --build-arg user=<githubusername>:<githubpassword> -t <some name>`
-* `docker run <some name> -p 9000:9000 -p 9001:9001 -p 9002:9002 -p 9003:9003 -p 9901:9901 -p 9902:9902 -p 9903:9903`
+* run `docker build . --build-arg user=<githubusername>:<githubpassword> --build-arg branch=release -t anonml/all --no-cache`
+* `docker run <some name> -p 9000:9000 -p 7000:7000`
 * open `http://localhost:9000` to access the UI
-* use `http://localhost:{9901; 9902; 9903}/logfile` to see the logfiles
+* use `http://localhost:7000` to see the admin ui
 
 
 ## Misc
