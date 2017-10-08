@@ -60,38 +60,60 @@ EXPOSE 9000
 
 RUN echo "....."
 #ML
-RUN git clone https://github.com/tudarmstadt-lt/GermaNER.git
+
+RUN git clone --progress --verbose http://github.com/tudarmstadt-lt/GermaNER.git
 RUN ls -lh
 RUN cd GermaNER/germaner && mvn clean install -q -Drat.skip=true
 
-RUN git clone https://github.com/seyyaw/cleartk.git
-RUN cd cleartk && mvn clean install -q -Drat.skip=true -Dcleartk.skipTests=svmlight -DskipTests
+RUN git clone --progress --verbose  https://github.com/seyyaw/cleartk.git
+RUN cd cleartk && mvn clean install -Drat.skip=true -Dcleartk.skipTests=svmlight -DskipTests
 
-#RUN echo "..........."
+USER linuxbrew
+RUN brew tap homebrew/science
+RUN brew install crfsuite
+USER root
+
+RUN echo "..............."
 RUN git clone https://${user}@github.com/anon-ml/anonml-recognition-ml.git
+
 
 
 RUN cd anonml-recognition-ml/service/src/main/resources/GermaNER && wget https://github.com/tudarmstadt-lt/GermaNER/releases/download/germaNER0.9.1/data.zip
 
 RUN touch anonml-recognition-ml/service/src/main/resources/GermaNER/temp-file-to-annotate.txt
 RUN cd anonml-recognition-ml && git checkout ${branch} && mvn clean install -q -DskipTests
+
+
 RUN echo "Admin"
 # ADMIN
 RUN git clone https://${user}@github.com/anon-ml/anonml-admin.git
 RUN cd anonml-admin && git checkout ${branch} && mvn clean install -q -DskipTests
 EXPOSE 7000
 
-USER linuxbrew
-RUN brew tap homebrew/science
-RUN brew install crfsuite
+
+USER root
+RUN echo "copy12"
+RUN mkdir model
+#RUN ls -lh anonml-recognition-ml/service/src/main/resources/GermaNER/model
+RUN mv anonml-recognition-ml/service/src/main/resources/GermaNER/model/model.jar model/model.jar
+RUN mv anonml-recognition-ml/service/src/main/resources/GermaNER/model/feature.xml model/feature.xml
+#RUN mv anonml-recognition-ml/service/src/main/resources/GermaNER/model/MANIFEST.MF model/MANIFEST.MF
+
 
 USER root
 EXPOSE 9003
+
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
 
 EXPOSE 9900
 EXPOSE 9901
 EXPOSE 9902
 EXPOSE 9903
-RUN echo "......"
-COPY start.sh /
-ENTRYPOINT /start.sh
+EXPOSE 9333
+EXPOSE 8000
+RUN echo ".."
+COPY start2.sh /
+ENTRYPOINT /start2.sh
