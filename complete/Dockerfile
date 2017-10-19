@@ -12,11 +12,17 @@ RUN apt-get install -y --no-install-recommends bsdtar
 RUN export tar='bsdtar'
 
 # JAVA
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:webupd8team/java
+#RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt-get update
-RUN echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
-RUN apt-get install -y oracle-java8-installer
+RUN apt-get install -y openjdk-8-jdk
+RUN update-alternatives --config java
+RUN update-alternatives --config javac
+#RUN apt-get install -y software-properties-common python-software-properties
+#RUN add-apt-repository ppa:webupd8team/java
+#RUN apt-get update
+#RUN echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
+
+#RUN apt-get install -y oracle-java8-installer
 
 # MONGO DB
 RUN apt-get install -y dirmngr
