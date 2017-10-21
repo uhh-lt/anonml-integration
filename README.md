@@ -8,7 +8,7 @@ Build with ``docker build . --build-arg user=githubusername:password -t anonml/d
 ## Complete
 * Change DockerFS to `aufs`
 * cd into the `complete` directory
-* run `docker build . --build-arg user=<githubusername>:<githubpassword> --build-arg branch=release -t anonml/all --no-cache`
+* run `docker build . --build-arg --build-arg branch=release -t anonml/all --no-cache`
 * `docker run <some name> -p 9000:9000 -p 7000:7000`
 * open `http://localhost:9000` to access the UI
 * use `http://localhost:7000` to see the admin ui
