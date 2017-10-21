@@ -1,6 +1,6 @@
 FROM linuxbrew/linuxbrew
 
-ARG user
+
 ARG branch
 
 USER root
@@ -41,24 +41,24 @@ RUN apt-get install -y git maven wget liblbfgs-dev tar build-essential
 
 
 #RUN export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-RUN git clone https://${user}@github.com/anon-ml/anonml-core.git
+RUN git clone https://github.com/anon-ml/anonml-core.git
 RUN cd anonml-core && git checkout ${branch} &&  mvn clean install -q -DskipTests
 
 
 
 # DOC MGMT
-RUN git clone https://${user}@github.com/anon-ml/anonml-document-management.git
+RUN git clone https://github.com/anon-ml/anonml-document-management.git
 RUN cd anonml-document-management && git checkout ${branch} &&  mvn clean install -q -DskipTests
 RUN apt-get install -y poppler-utils
 EXPOSE 9001
 
 # RULE BASED
-RUN git clone https://${user}@github.com/anon-ml/anonml-recognition-rulebased.git
+RUN git clone https://github.com/anon-ml/anonml-recognition-rulebased.git
 RUN cd anonml-recognition-rulebased && git checkout ${branch}  && mvn clean install -q -DskipTests
 EXPOSE 9002
 
 # WEB
-RUN git clone https://${user}@github.com/anon-ml/anonml-web.git
+RUN git clone https://github.com/anon-ml/anonml-web.git
 RUN cd anonml-web && git checkout ${branch} &&  mvn clean install -DskipTests
 EXPOSE 9000
 
@@ -80,7 +80,7 @@ RUN brew install crfsuite
 USER root
 
 RUN echo "..............."
-RUN git clone https://${user}@github.com/anon-ml/anonml-recognition-ml.git
+RUN git clone https://@github.com/anon-ml/anonml-recognition-ml.git
 
 
 
@@ -92,7 +92,7 @@ RUN cd anonml-recognition-ml && git checkout ${branch} && mvn clean install -q -
 
 RUN echo "Admin"
 # ADMIN
-RUN git clone https://${user}@github.com/anon-ml/anonml-admin.git
+RUN git clone https://github.com/anon-ml/anonml-admin.git
 RUN cd anonml-admin && git checkout ${branch} && mvn clean install -q -DskipTests
 EXPOSE 7000
 
