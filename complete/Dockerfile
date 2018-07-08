@@ -74,9 +74,17 @@ RUN cd GermaNER/germaner && mvn clean install -q -Drat.skip=true
 RUN git clone --progress --verbose  https://github.com/seyyaw/cleartk.git
 RUN cd cleartk && mvn clean install -Drat.skip=true -Dcleartk.skipTests=svmlight -DskipTests
 
+
 USER linuxbrew
-RUN brew tap homebrew/science
-RUN brew install crfsuite
+#RUN brew tap homebrew/science
+#RUN brew install crfsuite
+
+#Install crfsuite from the Linux Binary
+RUN wget https://github.com/downloads/chokkan/crfsuite/crfsuite-0.12-x86_64.tar.gz \
+&& tar zxvpf crfsuite-0.12-x86_64.tar.gz && rm crfsuite-0.12-x86_64.tar.gz
+
+ENV PATH="${PATH}:/home/linuxbrew/crfsuite-0.12/bin"
+
 USER root
 
 RUN echo "..............."
